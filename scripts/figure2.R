@@ -93,7 +93,7 @@ colnames(df_all) <- c("year", "dimension", "term", "similarity")
 
 p_imm_line <- df_all %>%
     filter(year >= 1880 & dimension == "Race" | dimension == "Affluence") %>%
-    dcast(year + term ~ dimension, value.var = "similarity") %>%
+    (year + term ~ dimension, value.var = "similarity") %>%
     ggplot(aes(x = Affluence, y = Race, group = term)) +
     geom_point(aes(color = term, shape = term), size = 2.5) +
     geom_text_repel(aes(label = year, hjust = .002)) +
@@ -120,3 +120,4 @@ dev.off()
 # -----------------------------------------------------------------------------
 # THE END
 # -----------------------------------------------------------------------------
+write_csv2(df_all, file="figure2_data.csv")
